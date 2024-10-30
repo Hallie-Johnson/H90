@@ -5,10 +5,28 @@ const PORT = 3000;
 const jwt = require('jsonwebtoken');
 const JWT_SECRET = 'Hallie';
 
+const mongoose = require('mongoose');
+const User = require('./models/User');
+
 const SAMPLE_USER = {
   username: 'Hallie',
   password: 'Hallie'
 };
+
+
+const addTestUser = async () => {
+  try {
+    const testUser = new User({ username: 'testuser', password: 'testpassword' });
+    await testUser.save();
+    console.log('Test user created');
+  } catch (error) {
+    console.error('Error creating test user:', error);
+  }
+};
+
+mongoose.connection.once('open', () => {
+  addTestUser();
+});
 
 
 
@@ -47,6 +65,21 @@ app.post('/login', (req, res) => {
 app.get('/dashboard', authenticateToken, (req, res) => {
   res.send('Access granted to the dashboard!');
 });
+
+
+
+const MONGO_URI = 'mongodb://localhost:27017/healthcareApp'; // Use your database name
+
+mongoose.connect(MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => console.log('MongoDB connected successfully'))
+.catch((error) => console.error('MongoDB connection error:', error));
+
+
+
+
 
 
 app.listen(PORT, () => {
