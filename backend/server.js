@@ -1,6 +1,7 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
-const PORT = 3000;
+const PORT = 3001;
 
 const jwt = require('jsonwebtoken');
 const JWT_SECRET = 'Hallie';
@@ -40,6 +41,8 @@ mongoose.connection.once('open', () => {
 });
 
 
+// Middleware CORS allow requests from frontend
+app.use(cors());
 // Middleware to parse JSON
 app.use(express.json());
 

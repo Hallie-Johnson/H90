@@ -1,22 +1,33 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Simple validation
     if (!username || !password) {
       setError('Both fields are required');
       return;
     }
 
-    // Clear error if validation passes
-    setError('');
-    console.log('Form submitted:', { username, password });
+    try {
+      // Send login credentials to backend
+      const response = await axios.post('http://localhost:3001/login', {
+        username,
+        password,
+      });
+
+      // Save JWT to localStorage on successful login
+      localStorage.setItem('token', response.data.token);
+      setError('');
+      alert('Login successful!');
+    } catch (err) {
+      setError('Invalid username or password');
+    }
   };
 
   return (
