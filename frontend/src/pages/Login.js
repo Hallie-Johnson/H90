@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-function Login() {
+function Login({ setIsLoggedIn }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -23,6 +23,7 @@ function Login() {
 
       // Save JWT to localStorage on successful login
       localStorage.setItem('token', response.data.token);
+      setIsLoggedIn(true); // Update login state
       setError('');
       alert('Login successful!');
     } catch (err) {
