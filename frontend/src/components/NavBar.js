@@ -13,14 +13,14 @@ function NavBar({ isLoggedIn, setIsLoggedIn }) {
   };
 
   return (
-    <nav>
+    <nav aria-label="Main Navigation">
       <ul>
         <li><Link to="/dashboard">Dashboard</Link></li>
         <li><Link to="/summary">Summary</Link></li>
         <li><Link to="/reports">Reports</Link></li>
         {isLoggedIn && (
           <li>
-            <button onClick={handleLogout}>Logout</button>
+            <button onClick={handleLogout} aria-label="Log out of your account">Logout</button>
           </li>
         )}
       </ul>

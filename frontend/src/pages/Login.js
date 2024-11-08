@@ -34,24 +34,30 @@ function Login({ setIsLoggedIn }) {
   return (
     <div>
       <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} aria-labelledby="login-form">
         <div>
-          <label>Username:</label>
+          <label htmlFor="username">Username:</label>
           <input
             type="text"
+            id="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            aria-required="true"
+            aria-label="Enter your username"
           />
         </div>
         <div>
-          <label>Password:</label>
+          <label htmlFor="password">Password:</label>
           <input
             type="password"
+            id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            aria-required="true"
+            aria-label="Enter your password"
           />
         </div>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
+        {error && <p role="alert" style={{ color: 'red' }}>{error}</p>}
         <button type="submit">Login</button>
       </form>
     </div>
