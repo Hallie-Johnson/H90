@@ -88,6 +88,32 @@ app.get('/dashboard', authenticateToken, (req, res) => {
 });
 
 
+// Summary Chart Data
+// https://www.inpart.io/blog/17-top-healthcare-innovations-2023
+app.get('/api/summary-data', (req, res) => {
+  res.json([
+    { label: "AI/Machine Learning", value: 24 },
+    { label: "Anti-Microbials", value: 18 },
+    { label: "Robotics", value: 18 },
+    { label: "Wearable Devices", value: 12 },
+    { label: "Other (nanomedicine, telemedicine, etc.)", value: 28 }
+  ]);
+});
+
+
+// Reports Chart Data
+// https://www.inpart.io/blog/17-top-healthcare-innovations-2023
+app.get('/api/reports-data', (req, res) => {
+  res.json([
+    { label: "USA", value: 34 },
+    { label: "UK", value: 24 },
+    { label: "Canada", value: 30 },
+    { label: "Colombia", value: 6 },
+    { label: "Japan", value: 6 }
+  ]);
+});
+
+
 // Start server
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
