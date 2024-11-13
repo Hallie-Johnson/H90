@@ -1,12 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import * as d3 from 'd3';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 
 function Reports() {
   const [data, setData] = useState([]);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
-    axios.get('http://localhost:3001/api/reports-data')
+    const token = localStorage.getItem('token');
+    if (!token) {
+      navigate('/');
+    }
+  }, [navigate]);
+
+  useEffect(() => {
+    axios.get('http://localhost:3000/api/reports-data')
       .then(response => setData(response.data))
       .catch(error => console.error('Error fetching data:', error));
   }, []);
@@ -60,8 +71,9 @@ function Reports() {
       <h1>Healthcare Innovations Report</h1>
       <div id="pie-chart"></div>
       <p>
-        This chart highlights the universities that are producing the top healthcare innovations. USA, Canada, and the UK are leading healthcare innovations, followed by Japan and Colombia. USA universities that are contributing to healthcare innovations are Cornell University, Case Western Reserve University, Texas Tech University System, University of California - Irvine, Georgia State University, University of Hawaii, and Queen's University. UK universities that are contributing are Imperial College London, Western University, University of Huddersfield, University of Sussex, and the Science and Technology Facilities Council. (https://www.inpart.io/blog/17-top-healthcare-innovations-2023)
+        This chart highlights the universities that are producing the top healthcare innovations. USA, Canada, and the UK are leading healthcare innovations, followed by Japan and Colombia. USA universities that are contributing to healthcare innovations are Cornell University, Case Western Reserve University, Texas Tech University System, University of California - Irvine, Georgia State University, University of Hawaii, and Queen's University. UK universities that are contributing are Imperial College London, Western University, University of Huddersfield, University of Sussex, and the Science and Technology Facilities Council. 
       </p>
+      <a href="https://www.inpart.io/blog/17-top-healthcare-innovations-2023">https://www.inpart.io/blog/17-top-healthcare-innovations-2023</a>
     </div>
   );
 }

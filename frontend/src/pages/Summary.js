@@ -1,12 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import * as d3 from 'd3';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 
 function Summary() {
   const [data, setData] = useState([]);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
-    axios.get('http://localhost:3001/api/summary-data')
+    const token = localStorage.getItem('token');
+    if (!token) {
+      navigate('/');
+    }
+  }, [navigate]);
+
+  useEffect(() => {
+    axios.get('http://localhost:3000/api/summary-data')
       .then(response => setData(response.data))
       .catch(error => console.error('Error fetching data:', error));
   }, []);
@@ -60,8 +71,9 @@ function Summary() {
       <h1>Summary of Healthcare Innovations</h1>
       <div id="pie-chart"></div>
       <p>
-        This chart highlights the applications that healthcare innovations work on. The chart showcases 17 top healthcare innovations that received the most engagement from the industry. AI/Machine learning and Other areas of healthcare make up over 50% of the most engaging healthcare innovations. (https://www.inpart.io/blog/17-top-healthcare-innovations-2023)
+        This chart highlights the applications that healthcare innovations work on. The chart showcases 17 top healthcare innovations that received the most engagement from the industry. AI/Machine learning and Other areas of healthcare make up over 50% of the most engaging healthcare innovations. 
       </p>
+      <a href="https://www.inpart.io/blog/17-top-healthcare-innovations-2023">https://www.inpart.io/blog/17-top-healthcare-innovations-2023</a>
     </div>
   );
 }

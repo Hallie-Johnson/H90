@@ -1,18 +1,32 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
-const PORT = 3001;
+const PORT = 3000;
 
 const jwt = require('jsonwebtoken');
 const JWT_SECRET = 'Hallie';
 
 const mongoose = require('mongoose');
-const User = require('./models/User');
 
 const SAMPLE_USER = {
   username: 'Hallie',
   password: 'Hallie'
 };
+
+
+// Summary Data set up
+const summaryDataSchema = new mongoose.Schema({
+  label: { type: String, required: true },
+  value: { type: Number, required: true },
+});
+const SummaryData = mongoose.model('SummaryData', summaryDataSchema);
+
+// Report Data set up
+const reportDataSchema = new mongoose.Schema({
+  label: { type: String, required: true },
+  value: { type: Number, required: true },
+});
+const ReportData = mongoose.model('ReportData', reportDataSchema);
 
 
 // Connect to MongoDB
@@ -23,22 +37,6 @@ mongoose.connect(MONGO_URI, {
 })
 .then(() => console.log('MongoDB connected successfully'))
 .catch((error) => console.error('MongoDB connection error:', error));
-
-
-// Add a test user to the database
-const addTestUser = async () => {
-  try {
-    const testUser = new User({ username: 'Hallie', password: 'Hallie' });
-    await testUser.save();
-    console.log('Test user created');
-  } catch (error) {
-    console.error('Error creating test user:', error);
-  }
-};
-
-mongoose.connection.once('open', () => {
-  addTestUser();
-});
 
 
 // Middleware CORS allow requests from frontend
@@ -82,35 +80,43 @@ app.post('/login', (req, res) => {
 });
 
 
-// Protected dashboard
+// Protected pages
 app.get('/dashboard', authenticateToken, (req, res) => {
   res.send('Access granted to the dashboard!');
+});
+
+app.get('/reports', authenticateToken, (req, res) => {
+  res.send('Access granted to reports!');
+});
+
+app.get('/summary', authenticateToken, (req, res) => {
+  res.send('Access granted to the summary!');
 });
 
 
 // Summary Chart Data
 // https://www.inpart.io/blog/17-top-healthcare-innovations-2023
-app.get('/api/summary-data', (req, res) => {
-  res.json([
-    { label: "AI/Machine Learning", value: 24 },
-    { label: "Anti-Microbials", value: 18 },
-    { label: "Robotics", value: 18 },
-    { label: "Wearable Devices", value: 12 },
-    { label: "Other (nanomedicine, telemedicine, etc.)", value: 28 }
-  ]);
+app.get('/api/summary-data', async (req, res) => {
+  try {
+    const summaryData = await SummaryData.find({});
+    res.json(summaryData);
+  } catch (error) {
+    console.error('Error fetching summary data:', error);
+    res.status(500).json({ message: 'Failed to retrieve summary data' });
+  }
 });
 
 
 // Reports Chart Data
 // https://www.inpart.io/blog/17-top-healthcare-innovations-2023
-app.get('/api/reports-data', (req, res) => {
-  res.json([
-    { label: "USA", value: 34 },
-    { label: "UK", value: 24 },
-    { label: "Canada", value: 30 },
-    { label: "Colombia", value: 6 },
-    { label: "Japan", value: 6 }
-  ]);
+app.get('/api/reports-data', async (req, res) => {
+  try {
+    const reportData = await ReportData.find({});
+    res.json(reportData);
+  } catch (error) {
+    console.error('Error fetching report data:', error);
+    res.status(500).json({ message: 'Failed to retrieve report data' });
+  }
 });
 
 
