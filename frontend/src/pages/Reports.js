@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import * as d3 from 'd3';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import '../App.css';
+import './Header.css';
+import './Footer.css';
 
 function Reports() {
   const [data, setData] = useState([]);
@@ -68,13 +70,28 @@ function Reports() {
 
   return (
     <div>
-      <h1>Healthcare Innovations Report</h1>
-      <div id="pie-chart"></div>
-      <p>
-        This chart highlights the universities that are producing the top healthcare innovations. USA, Canada, and the UK are leading healthcare innovations, followed by Japan and Colombia. USA universities that are contributing to healthcare innovations are Cornell University, Case Western Reserve University, Texas Tech University System, University of California - Irvine, Georgia State University, University of Hawaii, and Queen's University. UK universities that are contributing are Imperial College London, Western University, University of Huddersfield, University of Sussex, and the Science and Technology Facilities Council. 
-      </p>
-      <a href="https://www.inpart.io/blog/17-top-healthcare-innovations-2023">https://www.inpart.io/blog/17-top-healthcare-innovations-2023</a>
+      <header className="page-header" style={{ backgroundImage: "url('/images/global_healthcare.jpg')" }}>
+        <h1>Reports</h1>
+      </header>
+      <main>
+        <div className="container">
+          <div id="pie-chart" className="card" style={{ textAlign: 'center', padding: '20px' }}></div>
+          <p>
+            This chart highlights the universities that are producing the top healthcare innovations. USA, Canada, and the UK are leading healthcare innovations, followed by Japan and Colombia. USA universities that are contributing to healthcare innovations are Cornell University, Case Western Reserve University, Texas Tech University System, University of California - Irvine, Georgia State University, University of Hawaii, and Queen's University. UK universities that are contributing are Imperial College London, Western University, University of Huddersfield, University of Sussex, and the Science and Technology Facilities Council. 
+          </p>
+          <a href="https://www.inpart.io/blog/17-top-healthcare-innovations-2023">https://www.inpart.io/blog/17-top-healthcare-innovations-2023</a>
+        </div>
+        <div className="container">
+          <section className="card"> 
+            <a href="https://t4.ftcdn.net/jpg/10/15/22/61/360_F_1015226142_uWCOc6KsKLNk6Mi2Uu9DMaxx6ulb2zR3.jpg">Header Image Link</a>
+          </section>
+        </div>
+      </main>
+      <footer className="page-footer">
+        <h5 className="page-footer-text">Created by Hallie Johnson - ITIS 5166</h5>
+      </footer>
     </div>
+    
   );
 }
 

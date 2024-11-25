@@ -1,0 +1,15 @@
+.page-footer {
+    position: relative;
+    height: 100px;
+    background-size: cover;
+    background-position: center;
+    background-color: var(--secondary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .page-footer-text {
+    color: white;
+  }

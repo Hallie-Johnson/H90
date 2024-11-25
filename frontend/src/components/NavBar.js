@@ -1,29 +1,38 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './NavBar.css';
+import '../App.css';
 
 function NavBar({ isLoggedIn, setIsLoggedIn }) {
   const navigate = useNavigate();
 
-  // Logout handler
   const handleLogout = () => {
-    localStorage.removeItem('token'); // Clear JWT from localStorage
-    setIsLoggedIn(false); // Update login state
-    navigate('/'); // Redirect to login
+    localStorage.removeItem('token');
+    setIsLoggedIn(false);
+    navigate('/');
   };
 
   return (
-    <nav aria-label="Main Navigation">
-      <ul>
-        <li><Link to="/dashboard">Dashboard</Link></li>
-        <li><Link to="/summary">Summary</Link></li>
-        <li><Link to="/reports">Reports</Link></li>
+    <nav className="navbar" aria-label="Main Navigation">
+      <div className="navbar-content">
+        <div className="navbar-logo">
+          <img src="/images/h90logo.jpg" alt="App Logo" />
+        </div>
+        <ul className="navbar-links">
+          <li><Link to="/dashboard">Dashboard</Link></li>
+          <li><Link to="/summary">Summary</Link></li>
+          <li><Link to="/reports">Reports</Link></li>
+        </ul>
         {isLoggedIn && (
-          <li>
-            <button onClick={handleLogout} aria-label="Log out of your account">Logout</button>
-          </li>
+          <button 
+            onClick={handleLogout} 
+            className="logout-button" 
+            aria-label="Log out of your account"
+          >
+            Logout
+          </button>
         )}
-      </ul>
+      </div>
     </nav>
   );
 }

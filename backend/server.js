@@ -1,17 +1,26 @@
 const express = require('express');
 const cors = require('cors');
+const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
+const { expressjwt: jwtMW } = require('express-jwt');
+
 const app = express();
 const PORT = 3000;
 
-const jwt = require('jsonwebtoken');
+
+// User
 const JWT_SECRET = 'Hallie';
-
-const mongoose = require('mongoose');
-
 const SAMPLE_USER = {
   username: 'Hallie',
   password: 'Hallie'
 };
+
+
+// JWT Middleware
+const jwtMWInstance = jwtMW({
+  secret: JWT_SECRET,
+  algorithms: ['HS256']
+});
 
 
 // Summary Data set up
@@ -39,9 +48,8 @@ mongoose.connect(MONGO_URI, {
 .catch((error) => console.error('MongoDB connection error:', error));
 
 
-// Middleware CORS allow requests from frontend
+// Middleware
 app.use(cors());
-// Middleware to parse JSON
 app.use(express.json());
 
 
@@ -49,22 +57,6 @@ app.use(express.json());
 app.get('/', (req, res) => {
   res.send('Backend is working!');
 });
-
-
-// JWT authentication middleware
-function authenticateToken(req, res, next) {
-  const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1];
-
-  if (!token) return res.status(401).json({ message: 'Access Denied: No token provided' });
-
-  jwt.verify(token, JWT_SECRET, (err, user) => {
-    if (err) return res.status(403).json({ message: 'Access Denied: Invalid token' });
-
-    req.user = user; // Add the decoded user info to the request object
-    next();
-  });
-}
 
 
 // Login route to authenticate user and return a JWT
@@ -80,17 +72,26 @@ app.post('/login', (req, res) => {
 });
 
 
-// Protected pages
-app.get('/dashboard', authenticateToken, (req, res) => {
-  res.send('Access granted to the dashboard!');
+// Protected Routes (only accessible with a valid JWT)
+app.get('/dashboard', jwtMWInstance, (req, res) => {
+  res.json({
+    success: true,
+    message: 'Access granted to the dashboard!',
+  });
 });
 
-app.get('/reports', authenticateToken, (req, res) => {
-  res.send('Access granted to reports!');
+app.get('/reports', jwtMWInstance, (req, res) => {
+  res.json({
+    success: true,
+    message: 'Access granted to reports!',
+  });
 });
 
-app.get('/summary', authenticateToken, (req, res) => {
-  res.send('Access granted to the summary!');
+app.get('/summary', jwtMWInstance, (req, res) => {
+  res.json({
+    success: true,
+    message: 'Access granted to the summary!',
+  });
 });
 
 
