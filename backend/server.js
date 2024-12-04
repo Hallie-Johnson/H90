@@ -96,6 +96,15 @@ app.get('/summary', jwtMWInstance, (req, res) => {
 });
 
 
+// Middleware should return a 401 error if JWT is invalid or missing
+app.use((err, req, res, next) => {
+  if (err.name === 'UnauthorizedError') {
+    res.status(401).json({ message: 'Unauthorized access, please log in.' });
+  } else {
+    next(err);
+  }
+});
+
 /*
 // Insert summary data into MongoDB
 const insertSummaryData = async () => {

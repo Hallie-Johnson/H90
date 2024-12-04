@@ -19,22 +19,22 @@ function Login({ setIsLoggedIn }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     if (!username || !password) {
       setError('Both fields are required');
       return;
     }
-
+  
     try {
       const response = await axios.post('http://165.227.191.18:3000/login', {
         username,
         password,
       });
-
+  
       localStorage.setItem('token', response.data.token);
       setIsLoggedIn(true);
       setError('');
-      navigate('/dashboard'); 
+      navigate('/dashboard');
     } catch (err) {
       setError('Invalid username or password');
     }
