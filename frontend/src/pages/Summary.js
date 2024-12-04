@@ -70,28 +70,60 @@ function Summary() {
 
   return (
     <div>
-      <header className="page-header" style={{ backgroundImage: "url('/images/healthcare_innovations.jpg')" }}>
-        <h1>Summary</h1>
+
+      <header
+        className="page-header"
+        style={{ backgroundImage: "url('/images/healthcare_innovations.jpg')" }}
+        role="banner"
+        aria-labelledby="summary-heading"
+      >
+        <h1 id="summary-heading">Summary</h1>
       </header>
-      <main>
+
+      <main role="main">
+
         <div className="container">
-          <div id="pie-chart" className="card" style={{ textAlign: 'center', padding: '20px' }}></div>
+          <div
+            id="pie-chart"
+            className="card"
+            style={{ textAlign: 'center', padding: '20px' }}
+            aria-labelledby="chart-description"
+          ></div>
           <p>
-            This chart highlights the applications that healthcare innovations work on. The chart showcases 17 top healthcare innovations that received the most engagement from the industry. AI/Machine learning and Other areas of healthcare make up over 50% of the most engaging healthcare innovations. While AI/Machine learning and Other areas take up most of the healthcare innovations, antimicrobials and wearable technologies are a huge interest to the healthcare industry. However, the recent strides in Artificial Intelligence and Machine Learning have lead to a focus on those types of innovations.
+            This chart highlights the applications that healthcare innovations work on. The chart showcases 17 top healthcare innovations that received the most engagement from the industry. AI/Machine Learning and Other areas of healthcare make up over 50% of the most engaging healthcare innovations. While AI/Machine Learning and Other areas take up most of the healthcare innovations, antimicrobials and wearable technologies are a huge interest to the healthcare industry. However, the recent strides in Artificial Intelligence and Machine Learning have led to a focus on those types of innovations.
           </p>
-          <a href="https://www.inpart.io/blog/17-top-healthcare-innovations-2023">https://www.inpart.io/blog/17-top-healthcare-innovations-2023</a>
+          <a
+            href="https://www.inpart.io/blog/17-top-healthcare-innovations-2023"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Read more about the top healthcare innovations of 2023 on the inPart blog"
+          >
+            https://www.inpart.io/blog/17-top-healthcare-innovations-2023
+          </a>
         </div>
+
         <div className="container">
-          <section className="card"> 
-            <a href="https://insuranceblog.accenture.com/wp-content/uploads/2020/08/AdobeStock_208124828-1920x791.jpeg">Header Image Link</a>
+          <section className="card">
+            <a
+              href="https://insuranceblog.accenture.com/wp-content/uploads/2020/08/AdobeStock_208124828-1920x791.jpeg"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="View the full-size header image on an external website"
+            >
+              Header Image Link
+            </a>
           </section>
         </div>
+
       </main>
-      <footer className="page-footer">
+
+      <footer className="page-footer" role="contentinfo">
         <h5 className="page-footer-text">Created by Hallie Johnson - ITIS 5166</h5>
       </footer>
+
     </div>
   );
+  
 }
 
 export default Summary;

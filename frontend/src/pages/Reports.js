@@ -70,29 +70,62 @@ function Reports() {
 
   return (
     <div>
-      <header className="page-header" style={{ backgroundImage: "url('/images/global_healthcare.jpg')" }}>
-        <h1>Reports</h1>
+
+      <header 
+        className="page-header" 
+        style={{ backgroundImage: "url('/images/global_healthcare.jpg')" }}
+        role="banner" 
+        aria-labelledby="reports-heading"
+      >
+        <h1 id="reports-heading">Reports</h1>
       </header>
-      <main>
+
+      <main role="main">
+
         <div className="container">
-          <div id="pie-chart" className="card" style={{ textAlign: 'center', padding: '20px' }}></div>
+          <div 
+            id="pie-chart" 
+            className="card" 
+            style={{ textAlign: 'center', padding: '20px' }}
+            aria-labelledby="chart-description"
+          ></div>
           <p>
             This chart highlights the universities that are producing the top healthcare innovations. USA, Canada, and the UK are leading healthcare innovations, followed by Japan and Colombia. USA universities that are contributing to healthcare innovations are Cornell University, Case Western Reserve University, Texas Tech University System, University of California - Irvine, Georgia State University, University of Hawaii, and Queen's University. UK universities that are contributing are Imperial College London, Western University, University of Huddersfield, University of Sussex, and the Science and Technology Facilities Council. 
           </p>
-          <a href="https://www.inpart.io/blog/17-top-healthcare-innovations-2023">https://www.inpart.io/blog/17-top-healthcare-innovations-2023</a>
+          <a 
+            href="https://www.inpart.io/blog/17-top-healthcare-innovations-2023"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Read more about the top healthcare innovations of 2023 on the inPart blog"
+          >
+            https://www.inpart.io/blog/17-top-healthcare-innovations-2023
+          </a>
         </div>
+
         <div className="container">
-          <section className="card"> 
-            <a href="https://t4.ftcdn.net/jpg/10/15/22/61/360_F_1015226142_uWCOc6KsKLNk6Mi2Uu9DMaxx6ulb2zR3.jpg">Header Image Link</a>
+          <section className="card">
+            <h2 id="image-link-heading">Header Image Information</h2>
+            <a 
+              href="https://t4.ftcdn.net/jpg/10/15/22/61/360_F_1015226142_uWCOc6KsKLNk6Mi2Uu9DMaxx6ulb2zR3.jpg" 
+              aria-labelledby="image-link-heading"
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="accessible-link"
+            >
+              View the original header image
+            </a>
           </section>
         </div>
+
       </main>
-      <footer className="page-footer">
-        <h5 className="page-footer-text">Created by Hallie Johnson - ITIS 5166</h5>
+      <footer className="page-footer" role="contentinfo">
+        <h5 className="page-footer-text">
+          Created by Hallie Johnson - ITIS 5166
+        </h5>
       </footer>
     </div>
-    
   );
+  
 }
 
 export default Reports;

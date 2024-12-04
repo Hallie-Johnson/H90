@@ -41,10 +41,13 @@ function Login({ setIsLoggedIn }) {
   };
 
   return (
-    <div className="login-container">
+    <div className="login-container" role="main" aria-labelledby="login-heading">
       <div className="login-card">
-        <h1>Login</h1>
-        <form onSubmit={handleSubmit} aria-labelledby="login-form">
+        <h1 id="login-heading">Login</h1>
+        <form 
+          onSubmit={handleSubmit} 
+          aria-labelledby="login-heading" 
+        >
           <div>
             <label htmlFor="username">Username:</label>
             <input
@@ -53,9 +56,12 @@ function Login({ setIsLoggedIn }) {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               aria-required="true"
+              aria-describedby="username-help"
               aria-label="Enter your username"
+              autoComplete="username"
             />
           </div>
+
           <div>
             <label htmlFor="password">Password:</label>
             <input
@@ -64,16 +70,30 @@ function Login({ setIsLoggedIn }) {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               aria-required="true"
+              aria-describedby="password-help"
               aria-label="Enter your password"
+              autoComplete="current-password"
             />
           </div>
-          {error && <p role="alert" style={{ color: 'red' }}>{error}</p>}
-          <button type="submit">Login</button>
+
+          {error && (
+            <p 
+              role="alert" 
+              aria-live="assertive" 
+              style={{ color: 'red' }}
+            >
+              {error}
+            </p>
+          )}
+
+          <button type="submit" aria-label="Log in to your account">
+            Login
+          </button>
         </form>
       </div>
     </div>
-
   );
 }
+
 
 export default Login;
