@@ -28,6 +28,7 @@ function App() {
         <PrivateRoute path="/dashboard" element={<Dashboard />} />
         <PrivateRoute path="/summary" element={<Summary />} />
         <PrivateRoute path="/reports" element={<Reports />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>
   );
