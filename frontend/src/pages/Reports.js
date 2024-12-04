@@ -19,9 +19,12 @@ function Reports() {
   }, [navigate]);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/api/reports-data')
-      .then(response => setData(response.data))
-      .catch(error => console.error('Error fetching data:', error));
+    axios.get('/api/reports-data')
+      .then(response => {
+        console.log("Received data:", response.data);
+        setData(response.data);
+    })
+    .catch(error => console.error('Error fetching data:', error));
   }, []);
 
   useEffect(() => {

@@ -114,6 +114,7 @@ app.get('/api/summary-data', async (req, res) => {
 app.get('/api/reports-data', async (req, res) => {
   try {
     const reportData = await ReportData.find({});
+    console.log("Fetched reports data:", reportData);  // Log the data fetched from MongoDB
     res.json(reportData);
   } catch (error) {
     console.error('Error fetching report data:', error);
