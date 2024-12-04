@@ -5,7 +5,7 @@ import Dashboard from './pages/Dashboard';
 import Summary from './pages/Summary';
 import Reports from './pages/Reports';
 import NavBar from './components/NavBar';
-import PrivateRoute from './PrivateRoute'; 
+
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
