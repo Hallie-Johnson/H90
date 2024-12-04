@@ -96,6 +96,42 @@ app.get('/summary', jwtMWInstance, (req, res) => {
 });
 
 
+
+
+// Insert sample summary data into MongoDB if not already present
+const insertSummaryData = async () => {
+  const sampleData = [
+    { label: 'AI/Machine Learning', value: 24 },
+    { label: 'Anti-Microbials', value: 18 },
+    { label: 'Robotics', value: 18 },
+    { label: 'Wearable Devices', value: 12 },
+    { label: 'Other (nanomedicine, telemedicine, etc.)', value: 28 }
+  ];
+
+  // Check if the data already exists to avoid duplicates
+  const existingData = await SummaryData.countDocuments({});
+  if (existingData === 0) {
+    try {
+      await SummaryData.insertMany(sampleData);
+      console.log('Sample summary data inserted!');
+    } catch (error) {
+      console.error('Error inserting sample data:', error);
+    }
+  } else {
+    console.log('Summary data already exists in the database.');
+  }
+};
+
+// Call insertSummaryData when the server starts
+insertSummaryData();
+
+
+
+
+
+
+
+
 // Summary Chart Data
 // https://www.inpart.io/blog/17-top-healthcare-innovations-2023
 app.get('/api/summary-data', async (req, res) => {
