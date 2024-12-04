@@ -98,7 +98,7 @@ app.get('/summary', jwtMWInstance, (req, res) => {
 
 
 
-// Insert sample summary data into MongoDB if not already present
+// Insert summary data into MongoDB
 const insertSummaryData = async () => {
   const sampleData = [
     { label: 'AI/Machine Learning', value: 24 },
@@ -108,7 +108,6 @@ const insertSummaryData = async () => {
     { label: 'Other (nanomedicine, telemedicine, etc.)', value: 28 }
   ];
 
-  // Check if the data already exists to avoid duplicates
   const existingData = await SummaryData.countDocuments({});
   if (existingData === 0) {
     try {
@@ -122,8 +121,35 @@ const insertSummaryData = async () => {
   }
 };
 
-// Call insertSummaryData when the server starts
 insertSummaryData();
+
+
+// Insert report data into MongoDB
+const insertReportData = async () => {
+  const sampleData = [
+    { label: 'USA', value: 34 },
+    { label: 'UK', value: 24 },
+    { label: 'Canada', value: 30 },
+    { label: 'Colombia', value: 6 },
+    { label: 'Japan', value: 6 }
+  ];
+
+  const existingData = await ReportData.countDocuments({});
+  if (existingData === 0) {
+    try {
+      await ReportData.insertMany(sampleData);
+      console.log('Sample report data inserted!');
+    } catch (error) {
+      console.error('Error inserting sample data:', error);
+    }
+  } else {
+    console.log('Report data already exists in the database.');
+  }
+};
+
+insertReportData();
+
+
 
 
 
