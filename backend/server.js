@@ -96,8 +96,7 @@ app.get('/summary', jwtMWInstance, (req, res) => {
 });
 
 
-
-
+/*
 // Insert summary data into MongoDB
 const insertSummaryData = async () => {
   const sampleData = [
@@ -149,13 +148,7 @@ const insertReportData = async () => {
 
 insertReportData();
 
-
-
-
-
-
-
-
+*/
 
 
 // Summary Chart Data

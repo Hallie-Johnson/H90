@@ -48,7 +48,7 @@
     - Include a paragraph below each chart explaining its content and source.
 6. Incorporate **ADA/WCAG accessibility** principles into the frontend code as much as possible.
 7. Host both the **backend** and **frontend** on the same server (box).
-    - Use **NGINX** or **Apache** to serve the frontend.
+    - **Apache** is used to serve the frontend.
     - The backend should run on **port 3000**.
     - The frontend should run on the standard **HTTP port (80)**.
 8. The backend should operate independently of the frontend and respond to HTTP calls appropriately.

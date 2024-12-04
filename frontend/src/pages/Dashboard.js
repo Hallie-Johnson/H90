@@ -55,7 +55,7 @@ function Dashboard() {
           <section className="card">
             <h2 id="technical-details-heading">Technical Details</h2>
             <p>
-              This web application uses MongoDB for the database, Express and Node.js for the backend, and React for the frontend. The backend communicates with the frontend via HTTP, and authentication is managed with JSON Web Tokens (JWTs). The app is hosted on a single server, where NGINX is used to route requests between the frontend and backend.
+              This web application, H90, uses a Node.js backend, which communicates with a MongoDB database for data storage and retrieval to provide data for dynamic D3.js charts on the Summary and Reports pages. The frontend is built with React and JWT is used for secure authentication for the login page. The backend operates on port 3000, and the frontend is served via Apache on port 80, with both being hosted on the same server. The project contains ADA/WCAG accessibility principles within the HTML. The dynamic D3.js charts fetch data asynchronously from the backend via HTTP GET calls. All pages are designed as a Single Page Application (SPA) and is hosted on a DigitalOcean droplet. 
             </p>
           </section>
         </div>
