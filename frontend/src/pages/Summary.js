@@ -19,7 +19,7 @@ function Summary() {
   }, [navigate]);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/api/summary-data')
+    axios.get('http://165.227.191.18:3000/api/summary-data')
       .then(response => setData(response.data))
       .catch(error => console.error('Error fetching data:', error));
   }, []);
