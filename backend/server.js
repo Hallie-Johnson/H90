@@ -49,7 +49,8 @@ mongoose.connect(MONGO_URI, {
 
 
 // Middleware
-app.use(cors());
+//app.use(cors());
+app.use(cors({ origin: 'http://165.227.191.18' }));
 app.use(express.json());
 
 
@@ -100,14 +101,13 @@ app.get('/summary', jwtMWInstance, (req, res) => {
 app.get('/api/summary-data', async (req, res) => {
   try {
     const summaryData = await SummaryData.find({});
+    console.log("Fetched summary data:", summaryData);  // Log the data fetched from MongoDB
     res.json(summaryData);
   } catch (error) {
     console.error('Error fetching summary data:', error);
     res.status(500).json({ message: 'Failed to retrieve summary data' });
   }
-  console.log(summaryData);
 });
-
 
 // Reports Chart Data
 // https://www.inpart.io/blog/17-top-healthcare-innovations-2023

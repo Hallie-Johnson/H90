@@ -21,10 +21,10 @@ function Summary() {
   useEffect(() => {
     axios.get('/api/summary-data')
       .then(response => {
-        console.log(response.data);  // Log the response to inspect the data
+        console.log("Received data:", response.data);
         setData(response.data);
-      })
-      .catch(error => console.error('Error fetching data:', error));
+    })
+    .catch(error => console.error('Error fetching data:', error));
   }, []);
 
   useEffect(() => {
