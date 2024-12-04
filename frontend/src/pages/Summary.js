@@ -20,12 +20,16 @@ function Summary() {
 
   useEffect(() => {
     axios.get('/api/summary-data')
-      .then(response => setData(response.data))
+      .then(response => {
+        console.log(response.data);  // Log the response to inspect the data
+        setData(response.data);
+      })
       .catch(error => console.error('Error fetching data:', error));
   }, []);
 
   useEffect(() => {
     if (data.length === 0) return;
+    console.log("Rendering chart with data:", data);  // Log data before rendering
   
     const width = 750, height = 400, radius = Math.min(width, height) / 2 - 50;
     const color = d3.scaleOrdinal(d3.schemeCategory10);

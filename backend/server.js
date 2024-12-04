@@ -98,7 +98,6 @@ app.get('/summary', jwtMWInstance, (req, res) => {
 // Summary Chart Data
 // https://www.inpart.io/blog/17-top-healthcare-innovations-2023
 app.get('/api/summary-data', async (req, res) => {
-  console.log("getting summary data");
   try {
     const summaryData = await SummaryData.find({});
     res.json(summaryData);
@@ -106,6 +105,7 @@ app.get('/api/summary-data', async (req, res) => {
     console.error('Error fetching summary data:', error);
     res.status(500).json({ message: 'Failed to retrieve summary data' });
   }
+  console.log(summaryData);
 });
 
 
