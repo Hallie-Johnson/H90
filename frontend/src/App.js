@@ -5,6 +5,7 @@ import Dashboard from './pages/Dashboard';
 import Summary from './pages/Summary';
 import Reports from './pages/Reports';
 import NavBar from './components/NavBar';
+import PrivateRoute from './PrivateRoute'; 
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -24,9 +25,9 @@ function App() {
       {isLoggedIn && <NavBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />}
       <Routes>
         <Route path="/" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
-        <Route path="/dashboard" element={<PrivateRoute element={<Dashboard />} />} />
-        <Route path="/summary" element={<PrivateRoute element={<Summary />} />} />
-        <Route path="/reports" element={<PrivateRoute element={<Reports />} />} />
+        <PrivateRoute path="/dashboard" element={<Dashboard />} />
+        <PrivateRoute path="/summary" element={<Summary />} />
+        <PrivateRoute path="/reports" element={<Reports />} />
       </Routes>
     </Router>
   );

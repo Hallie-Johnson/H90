@@ -95,8 +95,7 @@ app.get('/summary', jwtMWInstance, (req, res) => {
   });
 });
 
-
-// Middleware should return a 401 error if JWT is invalid or missing
+// Middleware to return a 401 error if JWT is invalid or missing
 app.use((err, req, res, next) => {
   if (err.name === 'UnauthorizedError') {
     res.status(401).json({ message: 'Unauthorized access, please log in.' });
@@ -104,6 +103,12 @@ app.use((err, req, res, next) => {
     next(err);
   }
 });
+
+// 404 handler for any unmatched routes
+app.use((req, res) => {
+  res.status(404).json({ message: 'Route not found' });
+});
+
 
 /*
 // Insert summary data into MongoDB
